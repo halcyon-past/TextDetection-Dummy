@@ -1,0 +1,23 @@
+# Use the official Node.js image with Alpine as the base image
+FROM node:alpine
+
+# Set the working directory
+WORKDIR /app
+
+# Copy the package.json and package-lock.json files
+COPY package*.json ./
+
+# Remove the existing node_modules directory
+RUN rm -rf node_modules
+
+# Install dependencies
+RUN npm install
+
+# Copy the entire application
+COPY . .
+
+# Expose the port the app will run on
+EXPOSE 8000
+
+# Command to run the application in development mode
+CMD ["npm", "run", "dev"]
